@@ -1,11 +1,13 @@
 <script>
 import ToDoItem from "./components/ToDoItem.vue";
+import ToDoForm from "./components/ToDoForm.vue";
 import uniqueId from "lodash.uniqueid";
 
 export default {
   name: "app",
   components: {
     ToDoItem,
+    ToDoForm,
   },
   data: function () {
     return {
@@ -21,12 +23,22 @@ export default {
       ],
     };
   },
+  methods: {
+    addToDo(toDoLabel) {
+      this.ToDoItems.push({
+        id: uniqueId("todo-"),
+        label: toDoLabel,
+        done: false,
+      });
+    },
+  },
 };
 </script>
 
 <template>
   <div id="app">
     <h1>To-Do List</h1>
+    <to-do-form @todo-added="addToDo"></to-do-form>
     <ul>
       <li v-for="item in ToDoItems" :key="item.id">
         <to-do-item
