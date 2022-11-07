@@ -4,6 +4,7 @@ export default {
     onSubmit() {
       if (this.label.length < 1) return;
       this.$emit("todo-added", this.label);
+      this.$refs.createButton.focus();
       this.label = "";
     },
   },
@@ -30,6 +31,8 @@ export default {
       v-model.lazy.trim="label"
       class="input__lg"
     />
-    <button type="submit" class="btn btn__primary btn__lg">Add</button>
+    <button type="submit" class="btn btn__primary btn__lg" ref="createButton">
+      Add
+    </button>
   </form>
 </template>
